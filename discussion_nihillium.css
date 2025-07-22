@@ -20,14 +20,12 @@
   line-height: 1.6; /* Hauteur de ligne pour une meilleure lisibilité */
 }
 
-.character-image {
+.character-image-bg {
   flex-shrink: 0; /* Empêche l'image de rétrécir */
-  width: 100px; /* Largeur fixe pour l'image (ajustez si besoin) */
-  height: auto; /* Garde les proportions de l'image */
-}
-
-.character-image img {
-  display: block; /* Supprime l'espace sous l'image */
-  max-width: 100%; /* S'assure que l'image ne déborde pas de son conteneur */
-  height: auto; /* Maintient les proportions */
+  width: 100px; /* Largeur du conteneur pour l'image */
+  height: 100px; /* Hauteur du conteneur pour l'image - ajustez selon la taille de votre image */
+  background-image: url('https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png'); /* L'URL de votre image */
+  background-size: contain; /* Assure que l'image est entièrement visible et s'ajuste au conteneur */
+  background-repeat: no-repeat; /* Empêche l'image de se répéter */
+  background-position: center; /* Centre l'image dans son conteneur */
 }
