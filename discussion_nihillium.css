@@ -1,9 +1,8 @@
-/* --- Variables (aucune modification nécessaire ici, mais à titre de référence) --- */
 :root {
     --val-diag-border-radius:40px;
-    --val-diag-width-img:75px; /* Ajuste cette valeur pour changer la taille de l'image */
+    --val-diag-width-img:75px; /* Assure-toi que cette valeur est visible (ex: 75px) */
     /* ... tes autres variables ... */
-    --val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png");
+    --val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png"); /* Vérifie l'URL de l'image ici */
 }
 
 /* --- Animations de Glitch (aucune modification nécessaire ici) --- */
@@ -13,18 +12,12 @@
 
 /* --- Style Général des Dialogues (.val_dial) --- */
 .val_dial {
-    /* min-height est moins nécessaire avec Flexbox, mais on peut le garder */
     min-height: calc(10px + var(--val-diag-width-img));
     border-radius: var(--val-diag-border-radius) 10px 10px var(--val-diag-border-radius);
+    margin: 5px; /* Ou la marge que tu as définie */
+    padding: 5px; /* Essentiel pour la visibilité de la boîte */
+    border: 1px solid var(--val-diag-color); /* Essentiel pour voir la boîte */
     
-    /* Marges minimales du conteneur de dialogue */
-    margin: 5px 5px 5px 5px; /* Ou même 0 si tu veux coller aux bords */
-    padding: 5px; /* Espacement interne de la boîte */
-    
-    border: 1px solid var(--val-diag-color);
-    /* padding-left n'est plus nécessaire ici car l'image est à l'intérieur */
-    font-weight: bold;
-
     /* Styles pour <i> et <c> restent les mêmes */
     & i { /* ... */ }
     & c { /* ... */ }
@@ -36,24 +29,22 @@
 
 /* --- Nouvelle classe pour le conteneur de contenu --- */
 .dialog-content {
-    display: flex; /* Active Flexbox */
-    align-items: flex-start; /* Alignement en haut des éléments dans la ligne */
-    gap: 10px; /* Espace entre la vignette et le texte */
-    padding: 5px 0 5px 5px; /* Ajuste le padding ici si tu veux des marges spécifiques à l'intérieur du contenu */
+    display: flex; /* Ceci est crucial pour l'agencement */
+    align-items: flex-start;
+    gap: 10px;
+    padding: 5px 0 5px 5px; /* Assure-toi que le padding est là */
 }
 
 /* --- Style de la Vignette Glitchée (.vignette-container) --- */
 .vignette-container {
-    /* La vignette doit être à droite du texte */
-    order: 2; /* Place la vignette après le contenu textuel dans l'ordre Flexbox */
-    flex-shrink: 0; /* Empêche la vignette de rétrécir si le contenu texte est trop long */
-
-    /* Ces propriétés définissent l'image de fond et ses dimensions */
-    width: var(--val-diag-width-img);
-    height: var(--val-diag-width-img);
+    order: 2;
+    flex-shrink: 0;
+    width: var(--val-diag-width-img); /* Doit être défini */
+    height: var(--val-diag-width-img); /* Doit être défini */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    /* ... tes animations et box-shadow ... */
 
     /* Applique les animations de glitch */
     animation:
@@ -65,7 +56,6 @@
     box-shadow: 0 0 15px 5px var(--val-pasqal-color-lighten);
     transform-style: preserve-3d;
     transform: perspective(500px) rotateY(0deg);
-}
 
 /* --- Styles pour le texte à gauche de l'image --- */
 .dialog-content p,
@@ -79,7 +69,7 @@
 
 /* --- Styles spécifiques aux personnages (pour que la vignette soit bien appliquée) --- */
 .pasqal .vignette-container {
-    background-image: var(--val-diag-pasqal-vignette);
+    background-image: var(--val-diag-pasqal-vignette); /* Très important pour afficher l'image */
 }
 
 .default .vignette-container {
