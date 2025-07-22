@@ -45,8 +45,9 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+
     z-index: 10;
-    box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); /* Une petite lueur cyan subtile */
+    box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); /* C'est cette lueur subtile que tu as demandée */
 }
 
 /* --- Contenu du Texte --- */
