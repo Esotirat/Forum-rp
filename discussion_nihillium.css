@@ -3,8 +3,8 @@
     --dialog-border-thickness: 3px;
     --dialog-border-color: #00FFFF;
     --dialog-bg-color: rgba(0, 0, 0, 0.7);
-    --dialog-padding: 20px;
-    --dialog-image-size: 150px; /* Ajuste si besoin */
+    --dialog-padding: 20px; /* Padding interne de la boîte */
+    --dialog-image-size: 150px; /* Taille de l'image. Ajuste si tu veux plus petit ou plus grand. */
     --dialog-text-color: #E0FFFF;
     --dialog-font-family: 'Open Sans', sans-serif;
 
@@ -14,11 +14,10 @@
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
     position: relative; /* Indispensable pour positionner l'image de manière absolue */
-    display: block; /* Retour à un bloc normal */
+    display: block;
     width: 90%;
     max-width: 800px;
-    /* On retire tous les paddings directs ici, ils seront sur le .dialog-text-content */
-    padding: 0; /* <-- NOUVEAU : Réinitialise le padding du conteneur parent */
+    padding: 0; /* <-- TRÈS IMPORTANT : Le padding est géré par le .dialog-text-content */
 
     background-color: var(--dialog-bg-color);
     border: var(--dialog-border-thickness) solid var(--dialog-border-color);
@@ -27,37 +26,37 @@
     font-family: var(--dialog-font-family);
     color: var(--dialog-text-color);
     line-height: 1.6;
-    overflow: hidden; /* Pour contenir tout le contenu */
+    overflow: hidden; /* <-- Garder pour s'assurer que le contenu reste à l'intérieur des bordures */
 }
 
 /* --- Conteneur de l'Image du Personnage --- */
 .dialog-image-container {
-    position: absolute; /* <-- L'image est hors du flux normal */
-    top: calc(-1 * var(--dialog-image-size) / 8); /* Déborde légèrement au-dessus */
-    right: calc(-1 * var(--dialog-image-size) / 8); /* Déborde légèrement à droite */
+    position: absolute;
+    /* Ajustement de la position pour qu'elle déborde moins ou pas du tout */
+    top: -15px; /* Ajuste pour qu'elle déborde moins vers le haut (ex: -10px, 0px si tu ne veux pas de débordement) */
+    right: -15px; /* Ajuste pour qu'elle déborde moins vers la droite (ex: -10px, 0px si tu ne veux pas de débordement) */
     width: var(--dialog-image-size);
     height: var(--dialog-image-size);
     background-image: var(--pasqal-image);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-
-    /* PAS DE MARGES CAR POSITIONNEMENT ABSOLU */
-    /* PAS DE FLEX-PROPRIÉTÉS CAR PLUS DANS UN FLUX FLEXBOX */
-
     /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */ /* Décommenter si tu veux la lueur */
     z-index: 10;
 }
 
 /* --- Contenu du Texte --- */
 .dialog-text-content {
-    /* Le padding sera utilisé pour laisser de l'espace à l'image et aux bords de la boîte */
-    padding: var(--dialog-padding); /* Padding interne pour le texte */
-    /* Ajout de padding-top et padding-right pour compenser l'image qui déborde */
-    padding-top: calc(var(--dialog-padding) + var(--dialog-image-size) / 2); /* Plus d'espace en haut */
-    padding-right: calc(var(--dialog-padding) + var(--dialog-image-size) / 2); /* Plus d'espace à droite */
-    box-sizing: border-box; /* Inclut padding dans la taille */
-    min-height: calc(var(--dialog-image-size) / 2 + var(--dialog-padding) * 2); /* Hauteur minimale pour le texte */
+    /* Paddings pour le texte à l'intérieur de la boîte */
+    padding: var(--dialog-padding); /* Padding général pour le texte */
+
+    /* Ajustement des paddings pour laisser de la place à l'image sans que le texte commence trop bas */
+    /* Ces valeurs dépendent de --dialog-image-size et de comment tu veux que l'image chevauche. */
+    padding-top: calc(var(--dialog-padding) + (var(--dialog-image-size) / 2) - 30px); /* Ajuste le "-30px" pour remonter le texte */
+    padding-right: calc(var(--dialog-padding) + (var(--dialog-image-size) / 2) - 30px); /* Ajuste le "-30px" pour décaler le texte */
+    
+    min-height: calc(var(--dialog-image-size) - 20px); /* Ajuste cette valeur si la boîte est trop grande avec peu de texte */
+    box-sizing: border-box;
 }
 
 /* Ajustements pour les paragraphes à l'intérieur */
