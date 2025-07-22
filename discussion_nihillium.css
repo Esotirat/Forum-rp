@@ -14,7 +14,7 @@
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
     position: relative;
-    display: block;
+    display: block; /* Retour à 'block' pour simplifier le flux */
     width: 90%;
     max-width: 800px;
     padding: var(--dialog-padding);
@@ -24,7 +24,7 @@
     font-family: var(--dialog-font-family);
     color: var(--dialog-text-color);
     line-height: 1.6;
-    overflow: hidden; /* <-- Maintient le BFC de la boîte entière */
+    overflow: hidden; /* Garde ceci, ça aide à contenir les flottants */
 }
 
 /* --- Conteneur de l'Image du Personnage --- */
@@ -36,26 +36,41 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    margin-left: var(--dialog-padding); /* Marge à gauche de l'image pour séparer du texte */
-    margin-bottom: var(--dialog-padding); /* Marge en dessous de l'image pour séparer du texte qui continue */
+    margin-left: var(--dialog-padding); /* Marge à gauche de l'image */
+    margin-bottom: var(--dialog-padding); /* Marge en dessous de l'image */
 
     /* Si tu veux une lueur subtile, décommente ci-dessous */
     /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */
     z-index: 10;
 }
 
-/* --- Contenu du Texte --- */
+/* --- Contenu du Texte Global (juste un conteneur) --- */
 .dialog-text-content {
-    /* C'est ICI qu'on assure que le texte continue sous l'image */
-    overflow: hidden; /* <-- LE CHANGEMENT CLÉ : crée un nouveau BFC pour le texte */
-    /* ou overflow: auto; fonctionne aussi */
+    /* Pas de styles spécifiques ici, géré par les enfants */
+    /* Assure-toi qu'il n'y a PAS de 'overflow: hidden;' ou 'overflow: auto;' ICI ! */
+    /* C'était ça le problème la dernière fois: le BFC se terminait trop tôt. */
 }
 
-/* Ajustements pour les paragraphes à l'intérieur */
+/* --- Style pour le Texte au-dessus de l'Image --- */
+/* (Ce style s'appliquera par défaut au contenu de .dialog-text-content AVANT .dialog-text-bottom) */
 .dialog-text-content p {
     margin-top: 0;
     margin-bottom: 10px;
+    /* Le texte s'adaptera naturellement au float:right de l'image */
 }
-.dialog-text-content p:last-child {
+
+/* --- NOUVEAU : Style pour le Texte sous l'Image --- */
+.dialog-text-bottom {
+    clear: right; /* <-- C'EST LA CLÉ ! Force cet élément à commencer SOUS les flottants à droite */
+    /* clear: both; fonctionne aussi si tu avais des flottants à gauche */
+    margin-top: 0; /* Pour ne pas ajouter de marge inutile */
+}
+
+/* Ajustements des paragraphes à l'intérieur de .dialog-text-bottom */
+.dialog-text-bottom p {
+    margin-top: 0;
+    margin-bottom: 10px; /* Espacement entre les paragraphes */
+}
+.dialog-text-bottom p:last-child {
     margin-bottom: 0;
 }
