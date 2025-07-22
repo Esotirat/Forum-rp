@@ -8,7 +8,7 @@
     --val-pasqal-color:steelblue;
     --val-pasqal-color-darken:color-mix(in srgb, var(--val-pasqal-color), black 20%);
     --val-pasqal-color-lighten:color-mix(in srgb, var(--val-pasqal-color), white 20%);
-    --val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png");
+    --val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png");
 }
 
 /* DIALOGUES V2 */
