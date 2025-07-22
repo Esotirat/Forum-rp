@@ -15,16 +15,19 @@
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
     position: relative;
-    display: block; 
+    display: block; /* <-- Assure-toi que c'est bien 'block' pour un comportement de hauteur automatique */
+
     width: 90%;
     max-width: 800px;
+
     padding: var(--dialog-padding);
+    /* Ajuste ces padding si nécessaire, mais ils sont là pour l'image */
     padding-top: calc(var(--dialog-padding) + var(--dialog-image-size) / 4);
     padding-right: calc(var(--dialog-padding) + var(--dialog-image-size) / 4);
 
     background-color: var(--dialog-bg-color);
     border: var(--dialog-border-thickness) solid var(--dialog-border-color);
-    box-sizing: border-box;
+    box-sizing: border-box; /* Très important pour que padding/border soient inclus dans la taille */
 
     font-family: var(--dialog-font-family);
     color: var(--dialog-text-color);
@@ -48,9 +51,9 @@
 
 /* --- Contenu du Texte --- */
 .dialog-text-content {
-    overflow: auto;
-    padding-top: var(--dialog-image-size);
-    padding-right: var(--dialog-image-size);
+    overflow: auto; /* Permet le défilement si le texte est vraiment très long */
+    padding-top: var(--dialog-image-size); /* Laisse de l'espace pour l'image en haut */
+    padding-right: var(--dialog-image-size); /* Laisse de l'espace pour l'image à droite */
     box-sizing: border-box;
 }
 
