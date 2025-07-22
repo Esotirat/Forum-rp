@@ -57,9 +57,9 @@
 }
 
 .Pasqal {
-    border-color: var(--val-pasqal-color);
-    background-image: var(--val-diag-pasqal-vignette);
-    color: var(--val-pasqal-color);
+    border-color: var(--val-pasqal-color) !important;
+    background-image: url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png") !important;
+    color: var(--val-pasqal-color) !important;
 }
 
 .Pasqal c {
