@@ -3,8 +3,8 @@
     --dialog-border-thickness: 3px; /* Épaisseur du cadre */
     --dialog-border-color: #00FFFF; /* Couleur du cadre (un cyan éclatant) */
     --dialog-bg-color: rgba(0, 0, 0, 0.7); /* Couleur de fond de la boîte (noir semi-transparent) */
-    --dialog-padding: 20px; /* Espacement interne de la boîte (peut être réduit si besoin) */
-    --dialog-image-size: 200px; /* Taille de l'image de personnage (ajuste si tu veux plus petit) */
+    --dialog-padding: 20px; /* Espacement interne de la boîte */
+    --dialog-image-size: 100px; /* Taille de l'image de personnage (on la réduit pour mieux la gérer) */
     --dialog-text-color: #E0FFFF; /* Couleur du texte (blanc-bleu clair) */
     --dialog-font-family: 'Open Sans', sans-serif; /* Police de caractères pour le texte */
 
@@ -14,17 +14,16 @@
 
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
-    position: relative;
-    display: block; /* Va s'adapter à la hauteur de son contenu */
+    position: relative; /* Nécessaire pour positionner l'image */
+    display: flex; /* <-- Utilise Flexbox pour la mise en page */
+    flex-wrap: wrap; /* <-- Permet aux éléments de passer à la ligne si besoin */
+    align-items: flex-start; /* <-- Aligner les éléments en haut */
     width: 90%;
     max-width: 800px;
-
-    /* On retire complètement min-height pour qu'elle s'adapte au contenu du texte */
+    /* min-height: 120px; <-- ENLEVÉ : la hauteur s'adaptera au contenu Flexbox */
 
     padding: var(--dialog-padding);
-    /* Les padding-top et padding-right doivent juste s'assurer qu'il y a de la place pour l'image */
-    padding-top: calc(var(--dialog-padding) + var(--dialog-image-size) / 4); /* Plus de place en haut pour l'image qui déborde */
-    padding-right: calc(var(--dialog-padding) + var(--dialog-image-size) / 4); /* Plus de place à droite pour l'image qui déborde */
+    /* Les paddings seront gérés par la relation Flexbox entre les éléments */
 
     background-color: var(--dialog-bg-color);
     border: var(--dialog-border-thickness) solid var(--dialog-border-color);
@@ -37,28 +36,33 @@
 
 /* --- Conteneur de l'Image du Personnage --- */
 .dialog-image-container {
-    position: absolute;
-    top: calc(-1 * var(--dialog-image-size) / 8); /* Déborde légèrement au-dessus */
-    right: calc(-1 * var(--dialog-image-size) / 8); /* Déborde légèrement à droite */
-    width: var(--dialog-image-size);
+    /* Suppression de position: absolute car on veut qu'elle soit dans le flux Flexbox */
+    /* top, right, z-index ne sont plus nécessaires avec Flexbox pour ce positionnement */
+    width: var(--dialog-image-size); /* Taille de l'image */
     height: var(--dialog-image-size);
     background-image: var(--pasqal-image); /* L'image du personnage */
-    background-size: contain; /* L'IMAGE ENTIÈRE EST VISIBLE */
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    /* BORDURE ET BOÎTE D'OMBRE : */
-    box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); /* C'est cette lueur subtile que tu as demandée */
-    z-index: 10;
+    flex-shrink: 0; /* Empêche l'image de rétrécir */
+
+    /* On ajoute de la marge à gauche pour la déplacer vers la droite du conteneur Flexbox */
+    margin-left: auto; /* <-- Pousse l'élément vers la droite dans Flexbox */
+    margin-bottom: var(--dialog-padding); /* Petite marge sous l'image si le texte est court */
+
+    /* Si tu veux une lueur subtile, décommente ci-dessous, sinon supprime la ligne */
+    /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */
 }
 
 /* --- Contenu du Texte --- */
 .dialog-text-content {
-    overflow: auto;
-    /* CE SONT CES PADDINGS QUI CAUSENT LE PLUS GRAND ESPACE VIDE SOUS LE TEXTE */
-    /* Nous devons réduire ces paddings, car l'image est gérée par son conteneur absolu */
-    padding-top: 0; /* L'image est au-dessus et en dehors du flux du texte, pas besoin de ça ici */
-    padding-right: 0; /* Pas besoin de ça ici non plus, le padding du .dialog-box gère l'espace */
-    box-sizing: border-box;
+    /* Supprimons les paddings qui décalaient le texte et agrandissaient la boîte */
+    padding: 0;
+    overflow: auto; /* Permet le défilement si le texte est très très long */
+    /* Le texte prendra l'espace restant */
+    flex-grow: 1; /* <-- LE TEXTE PREND TOUT L'ESPACE DISPONIBLE EN LARGEUR */
+    flex-basis: 0; /* Aide flex-grow à fonctionner correctement */
+    min-width: 0; /* Nécessaire pour éviter les débordements de texte à l'intérieur de flexbox */
 }
 
 /* Ajustements pour les paragraphes à l'intérieur */
