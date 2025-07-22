@@ -3,8 +3,8 @@
     --dialog-border-thickness: 3px; /* Épaisseur du cadre */
     --dialog-border-color: #00FFFF; /* Couleur du cadre (un cyan éclatant) */
     --dialog-bg-color: rgba(0, 0, 0, 0.7); /* Couleur de fond de la boîte (noir semi-transparent) */
-    --dialog-padding: 20px; /* Espacement interne de la boîte */
-    --dialog-image-size: 100px; /* Taille de l'image de personnage pour le fond de boîte (plus petite) */
+    --dialog-padding: 20px; /* Espacement interne de la boîte (peut être réduit si besoin) */
+    --dialog-image-size: 200px; /* Taille de l'image de personnage (ajuste si tu veux plus petit) */
     --dialog-text-color: #E0FFFF; /* Couleur du texte (blanc-bleu clair) */
     --dialog-font-family: 'Open Sans', sans-serif; /* Police de caractères pour le texte */
 
@@ -15,16 +15,16 @@
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
     position: relative;
-    display: block;
+    display: block; /* Va s'adapter à la hauteur de son contenu */
     width: 90%;
     max-width: 800px;
 
-    /* REINTRODUISONS UNE MIN-HEIGHT COMME DANS L'EXEMPLE, ADAPTEE */
-    min-height: calc(var(--dialog-padding) * 2 + var(--dialog-image-size)); /* 2x padding + taille image pour la min-height */
+    /* On retire complètement min-height pour qu'elle s'adapte au contenu du texte */
 
     padding: var(--dialog-padding);
-    /* LE PADDING A GAUCHE EST POUR LAISSER LA PLACE A L'IMAGE DE FOND */
-    padding-left: calc(var(--dialog-padding) * 2 + var(--dialog-image-size)); /* Ajuste le padding pour l'image de fond */
+    /* Les padding-top et padding-right doivent juste s'assurer qu'il y a de la place pour l'image */
+    padding-top: calc(var(--dialog-padding) + var(--dialog-image-size) / 4); /* Plus de place en haut pour l'image qui déborde */
+    padding-right: calc(var(--dialog-padding) + var(--dialog-image-size) / 4); /* Plus de place à droite pour l'image qui déborde */
 
     background-color: var(--dialog-bg-color);
     border: var(--dialog-border-thickness) solid var(--dialog-border-color);
@@ -33,28 +33,39 @@
     font-family: var(--dialog-font-family);
     color: var(--dialog-text-color);
     line-height: 1.6;
-
-    /* --- GESTION DE L'IMAGE EN FOND DE LA BOÎTE PRINCIPALE --- */
-    background-image: var(--pasqal-image);
-    background-position: var(--dialog-padding) var(--dialog-padding); /* Positionne l'image en haut à gauche, avec le padding */
-    background-size: var(--dialog-image-size) var(--dialog-image-size);
-    background-repeat: no-repeat;
-    /* PAS DE BOX-SHADOW ICI, LAISSE LA BORDURE PAR DEFAUT DE LA BOITE */
 }
 
-/* --- Contenu du Texte (simplifié car plus de conteneur d'image séparé) --- */
+/* --- Conteneur de l'Image du Personnage --- */
+.dialog-image-container {
+    position: absolute;
+    top: calc(-1 * var(--dialog-image-size) / 8); /* Déborde légèrement au-dessus */
+    right: calc(-1 * var(--dialog-image-size) / 8); /* Déborde légèrement à droite */
+    width: var(--dialog-image-size);
+    height: var(--dialog-image-size);
+    background-image: var(--pasqal-image); /* L'image du personnage */
+    background-size: contain; /* L'IMAGE ENTIÈRE EST VISIBLE */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* BORDURE ET BOÎTE D'OMBRE : */
+    box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); /* C'est cette lueur subtile que tu as demandée */
+    z-index: 10;
+}
+
+/* --- Contenu du Texte --- */
 .dialog-text-content {
     overflow: auto;
-    /* Les padding-top et padding-right sont gérés par le padding-left de .dialog-box maintenant */
-    /* PAS BESOIN DE PADDING-TOP OU PADDING-RIGHT SPECIFIQUE POUR GERER L'IMAGE ICI */
+    /* CE SONT CES PADDINGS QUI CAUSENT LE PLUS GRAND ESPACE VIDE SOUS LE TEXTE */
+    /* Nous devons réduire ces paddings, car l'image est gérée par son conteneur absolu */
+    padding-top: 0; /* L'image est au-dessus et en dehors du flux du texte, pas besoin de ça ici */
+    padding-right: 0; /* Pas besoin de ça ici non plus, le padding du .dialog-box gère l'espace */
     box-sizing: border-box;
 }
 
 /* Ajustements pour les paragraphes à l'intérieur */
 .dialog-text-content p {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Espacement entre les paragraphes */
 }
 .dialog-text-content p:last-child {
-    margin-bottom: 0;
+    margin-bottom: 0; /* Pas de marge après le dernier paragraphe */
 }
