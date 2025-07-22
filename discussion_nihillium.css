@@ -14,49 +14,44 @@
 
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
-    position: relative; /* Important pour positionner l'image à l'intérieur */
-    display: flex; /* Utilise flexbox pour une meilleure gestion du contenu */
-    flex-direction: column; /* Les éléments s'empilent verticalement */
-    width: 90%; /* La boîte prendra 90% de la largeur disponible de son parent */
-    max-width: 800px; /* Mais elle ne dépassera jamais 800px (pour ne pas être trop large sur grands écrans) */
-    min-height: 120px; /* Hauteur minimale pour les dialogues courts */
+    position: relative;
+    display: block; 
+    width: 90%;
+    max-width: 800px;
     padding: var(--dialog-padding);
-    padding-top: calc(var(--dialog-padding) + var(--dialog-image-size) / 4); /* Ajuste le padding pour l'image */
-    padding-right: calc(var(--dialog-padding) + var(--dialog-image-size) / 4); /* Ajuste le padding pour l'image */
+    padding-top: calc(var(--dialog-padding) + var(--dialog-image-size) / 4);
+    padding-right: calc(var(--dialog-padding) + var(--dialog-image-size) / 4);
 
-    background-color: var(--dialog-bg-color); /* Fond semi-transparent */
-    border: var(--dialog-border-thickness) solid var(--dialog-border-color); /* Cadre anguleux */
-    box-sizing: border-box; /* S'assure que padding et border sont inclus dans la width/height */
+    background-color: var(--dialog-bg-color);
+    border: var(--dialog-border-thickness) solid var(--dialog-border-color);
+    box-sizing: border-box;
 
     font-family: var(--dialog-font-family);
     color: var(--dialog-text-color);
-    line-height: 1.6; /* Espacement des lignes pour une meilleure lisibilité */
+    line-height: 1.6;
 }
 
 /* --- Conteneur de l'Image du Personnage --- */
 .dialog-image-container {
-    position: absolute; /* Positionne l'image par rapport à .dialog-box */
-    top: calc(-1 * var(--dialog-image-size) / 8); /* Déborde légèrement au-dessus */
-    right: calc(-1 * var(--dialog-image-size) / 8); /* Déborde légèrement à droite */
+    position: absolute;
+    top: calc(-1 * var(--dialog-image-size) / 8);
+    right: calc(-1 * var(--dialog-image-size) / 8);
     width: var(--dialog-image-size);
     height: var(--dialog-image-size);
     background-image: var(--pasqal-image); /* L'image du personnage */
-    background-size: cover; /* L'image couvre toute la zone, peut être rognée */
-    background-position: center; /* Centre l'image dans son conteneur */
+    background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
-    border: var(--dialog-border-thickness) solid var(--dialog-border-color); /* Bordure autour de l'image */
-    z-index: 10; /* S'assure que l'image est au-dessus du texte si elle chevauche */
+    z-index: 10;
     box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); /* Une petite lueur cyan subtile */
 }
 
 /* --- Contenu du Texte --- */
 .dialog-text-content {
-    flex-grow: 1; /* Permet au contenu texte de prendre tout l'espace disponible */
-    overflow: auto; /* Ajoute des barres de défilement si le texte est très long et dépasse */
-    /* Assure que le texte ne se superpose pas à l'image */
-    padding-top: var(--dialog-image-size); /* Un grand padding-top pour laisser de l'espace à l'image */
-    padding-right: var(--dialog-image-size); /* Un grand padding-right pour laisser de l'espace à l'image */
-    box-sizing: border-box; /* Important pour les paddings */
+    overflow: auto;
+    padding-top: var(--dialog-image-size);
+    padding-right: var(--dialog-image-size);
+    box-sizing: border-box;
 }
 
 /* Ajustements pour les paragraphes à l'intérieur */
