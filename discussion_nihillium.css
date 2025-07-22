@@ -14,7 +14,7 @@
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
     position: relative;
-    display: block; /* Retour à 'block' pour gérer le flux de texte plus facilement */
+    display: block;
     width: 90%;
     max-width: 800px;
     padding: var(--dialog-padding);
@@ -24,12 +24,12 @@
     font-family: var(--dialog-font-family);
     color: var(--dialog-text-color);
     line-height: 1.6;
-    overflow: hidden; /* Important pour contenir les flottants */
+    overflow: hidden; /* <-- Maintient le BFC de la boîte entière */
 }
 
 /* --- Conteneur de l'Image du Personnage --- */
 .dialog-image-container {
-    float: right; /* <-- Fait flotter l'image à droite */
+    float: right; /* Fait flotter l'image à droite */
     width: var(--dialog-image-size);
     height: var(--dialog-image-size);
     background-image: var(--pasqal-image);
@@ -41,14 +41,14 @@
 
     /* Si tu veux une lueur subtile, décommente ci-dessous */
     /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */
-    z-index: 10; /* Assure-toi qu'elle est au-dessus du texte */
+    z-index: 10;
 }
 
 /* --- Contenu du Texte --- */
 .dialog-text-content {
-    /* Le texte va naturellement contourner l'image flottante */
-    /* Pas de padding-right ou margin-right spécifique ici, float le gère */
-    overflow: hidden; /* Assure que le texte se conforme au float */
+    /* C'est ICI qu'on assure que le texte continue sous l'image */
+    overflow: hidden; /* <-- LE CHANGEMENT CLÉ : crée un nouveau BFC pour le texte */
+    /* ou overflow: auto; fonctionne aussi */
 }
 
 /* Ajustements pour les paragraphes à l'intérieur */
