@@ -1,94 +1,33 @@
-:root {
-    --val-diag-border-radius:40px;
-    --val-diag-width-img:75px; /* Assure-toi que cette valeur est visible (ex: 75px) */
-    /* ... tes autres variables ... */
-    --val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png"); /* Vérifie l'URL de l'image ici */
+.dialog-bubble {
+  display: flex; /* Permet de placer l'image et le texte côte à côte */
+  align-items: center; /* Centre verticalement le contenu */
+  border: 2px solid cyan; /* Bordure cyan de 2px, non arrondie par défaut */
+  padding: 15px; /* Espace interne pour le contenu */
+  margin-bottom: 20px; /* Espace sous chaque bulle de dialogue */
+  max-width: 800px; /* Largeur maximale de la bulle pour une meilleure lisibilité */
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur/hauteur */
 }
 
-/* --- Animations de Glitch (aucune modification nécessaire ici) --- */
-@keyframes glitch-x { /* ... */ }
-@keyframes glitch-color { /* ... */ }
-@keyframes flicker { /* ... */ }
-
-/* --- Style Général des Dialogues (.val_dial) --- */
-.val_dial {
-    min-height: calc(10px + var(--val-diag-width-img));
-    border-radius: var(--val-diag-border-radius) 10px 10px var(--val-diag-border-radius);
-    margin: 5px; /* Ou la marge que tu as définie */
-    padding: 5px; /* Essentiel pour la visibilité de la boîte */
-    border: 1px solid var(--val-diag-color); /* Essentiel pour voir la boîte */
-    
-    /* Styles pour <i> et <c> restent les mêmes */
-    & i { /* ... */ }
-    & c { /* ... */ }
-    & c:nth-child(odd) { /* ... */ }
-
-    /* Le pseudo-élément ::before reste le même */
-    &::before { /* ... */ }
-}
-
-/* --- Nouvelle classe pour le conteneur de contenu --- */
 .dialog-content {
-    display: flex; /* Ceci est crucial pour l'agencement */
-    align-items: flex-start;
-    gap: 10px;
-    padding: 5px 0 5px 5px; /* Assure-toi que le padding est là */
+  flex-grow: 1; /* Permet au contenu du dialogue de prendre le maximum d'espace disponible */
+  margin-right: 20px; /* Espace entre le texte et l'image */
+  text-align: left; /* Alignement du texte à gauche */
 }
 
-/* --- Style de la Vignette Glitchée (.vignette-container) --- */
-.vignette-container {
-    order: 2;
-    flex-shrink: 0;
-    width: var(--val-diag-width-img); /* Doit être défini */
-    height: var(--val-diag-width-img); /* Doit être défini */
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    /* ... tes animations et box-shadow ... */
-
-    /* Applique les animations de glitch */
-    animation:
-        glitch-x 0.1s infinite steps(2) alternate,
-        glitch-color 0.3s infinite steps(2) alternate,
-        flicker 1.2s infinite steps(1);
-
-    /* Ajout d'une ombre portée pour l'effet hologramme */
-    box-shadow: 0 0 15px 5px var(--val-pasqal-color-lighten);
-    transform-style: preserve-3d;
-    transform: perspective(500px) rotateY(0deg);
-
-/* --- Styles pour le texte à gauche de l'image --- */
-.dialog-content p,
-.dialog-content i,
-.dialog-content c {
-    flex-grow: 1; /* Permet au texte de prendre l'espace restant */
-    /* Aucun alignement particulier nécessaire ici, il flottera à gauche */
-    margin-top: 0; /* Supprime les marges par défaut des paragraphes pour un contrôle fin */
-    margin-bottom: 0;
+.dialog-content p {
+  margin: 0; /* Supprime la marge par défaut des paragraphes */
+  color: #333; /* Couleur du texte (ajustez si besoin) */
+  line-height: 1.6; /* Hauteur de ligne pour une meilleure lisibilité */
 }
 
-/* --- Styles spécifiques aux personnages (pour que la vignette soit bien appliquée) --- */
-.pasqal .vignette-container {
-    background-image: var(--val-diag-pasqal-vignette); /* Très important pour afficher l'image */
+.character-image {
+  flex-shrink: 0; /* Empêche l'image de rétrécir */
+  width: 100px; /* Largeur fixe pour l'image (ajustez si besoin) */
+  height: auto; /* Garde les proportions de l'image */
 }
 
-.default .vignette-container {
-    background-image: var(--val-diag-default-vignette);
-    /* Tu peux aussi appliquer les animations ici si tu veux que default glitch aussi */
-}
-
-/* Ajoute des règles similaires pour .valdyra et .kay si tu veux qu'elles utilisent la nouvelle vignette */
-.valdyra .vignette-container {
-    background-image: var(--val-diag-valdyra-vignette);
-}
-.kay .vignette-container {
-    background-image: var(--val-diag-kay-vignette);
-}
-
-/* ... tes autres classes .default, .valdyra, .kay pour les couleurs etc. restent les mêmes */
-.pasqal {
-    border-color: var(--val-pasqal-color);
-    color: var(--val-pasqal-color);
-    &::before { content: "Pasqal"; }
-    & c { text-shadow: 1px 1px var(--val-pasqal-color-darken); }
+.character-image img {
+  display: block; /* Supprime l'espace sous l'image */
+  max-width: 100%; /* S'assure que l'image ne déborde pas de son conteneur */
+  height: auto; /* Maintient les proportions */
 }
