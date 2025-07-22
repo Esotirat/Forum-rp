@@ -1,31 +1,72 @@
-.dialog-bubble {
-  display: flex; /* Permet de placer l'image et le texte côte à côte */
-  align-items: center; /* Centre verticalement le contenu */
-  border: 2px solid cyan; /* Bordure cyan de 2px, non arrondie par défaut */
-  padding: 15px; /* Espace interne pour le contenu */
-  margin-bottom: 20px; /* Espace sous chaque bulle de dialogue */
-  max-width: 800px; /* Largeur maximale de la bulle pour une meilleure lisibilité */
-  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur/hauteur */
+:root {
+	--val-diag-border-radius:40px;
+	--val-diag-width-img:75px;
+	/* nodata */
+	--val-diag-color:#999999;
+	--val-diag-color-darken:color-mix(in srgb, var(--val-diag-color), black 20%);
+	--val-diag-color-lighten:color-mix(in srgb, var(--val-diag-color), white 20%);
+	--val-diag-default-vignette:url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
+	/* Pascal */
+	--val-pasqal-color:steelblue;
+	--val-pasqal-color-darken:color-mix(in srgb, var(--val-pasqal-color), black 20%);
+	--val-pasqal-color-lighten:color-mix(in srgb, var(--val-pasqal-color), white 20%);
+	--val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png");
 }
 
-.dialog-content {
-  flex-grow: 1; /* Permet au contenu du dialogue de prendre le maximum d'espace disponible */
-  margin-right: 20px; /* Espace entre le texte et l'image */
-  text-align: left; /* Alignement du texte à gauche */
+/* DIALOGUES V2 */
+.val_dial {
+	min-height:calc(10px + var(--val-diag-width-img));
+    border-radius:var(--val-diag-border-radius) 10px 10px var(--val-diag-border-radius);
+    margin:20px 20px 0px 20px;
+    padding:5px;
+    border:1px solid var(--val-diag-color);
+    padding-left:calc(15px + var(--val-diag-width-img));
+    padding-right:calc(15px + var(--val-diag-width-img));
+    font-weight:bold;
+
+	& i {
+		color:var(--val-diag-color);
+		font-weight:normal;
+	}
+
+	& c {
+		display:inline-block;
+  		transform: translateY(-1px);
+  		animation-name: wiggleWiggle;
+  		animation-duration: 0.15s;
+  		animation-iteration-count: infinite;
+  		text-shadow: 1px 1px var(--val-diag-color-darken);
+	}
+
+	& c:nth-child(odd) {
+  		animation-direction:reverse;
+	}
+
+	&::before {
+		content:"-";
+		color:var(--val-diag-color);
+		text-transform: uppercase;
+		display:block;
+		font-weight:600;
+		font-style: italic;
+		margin-bottom:3px;		
+		padding-bottom:3px;	
+		border-bottom:1px solid var(--val-diag-color);	
+	}
 }
 
-.dialog-content p {
-  margin: 0; /* Supprime la marge par défaut des paragraphes */
-  color: #333; /* Couleur du texte (ajustez si besoin) */
-  line-height: 1.6; /* Hauteur de ligne pour une meilleure lisibilité */
-}
+.nodata,
+.Pasqal {
+    border-color: var(--val-pasqal-color);
+    background-image: var(--val-diag-pasqal-vignette);
+    color: var(--val-pasqal-color);
 
-.character-image-bg {
-  flex-shrink: 0; /* Empêche l'image de rétrécir */
-  width: 100px; /* Largeur du conteneur pour l'image */
-  height: 100px; /* Hauteur du conteneur pour l'image - ajustez selon la taille de votre image */
-  background-image: url('https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png'); /* L'URL de votre image */
-  background-size: contain; /* Assure que l'image est entièrement visible et s'ajuste au conteneur */
-  background-repeat: no-repeat; /* Empêche l'image de se répéter */
-  background-position: center; /* Centre l'image dans son conteneur */
+    /* Optionnel : effet d’ombre sur le texte animé */
+    & c {
+        text-shadow: 1px 1px var(--val-pasqal-color-darken);
+    }
+
+    &::before {
+        content: "Pasqal";
+    }
 }
