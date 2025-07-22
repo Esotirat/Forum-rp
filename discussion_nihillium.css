@@ -1,80 +1,104 @@
-/* --- Variables Générales --- */
+/* --- Variables (aucune modification nécessaire ici, mais à titre de référence) --- */
 :root {
-    --dialog-border-thickness: 3px;
-    --dialog-border-color: #00FFFF;
-    --dialog-bg-color: rgba(0, 0, 0, 0.7);
-    --dialog-padding: 20px; /* Padding interne de la boîte */
-    --dialog-image-size: 150px; /* Taille de l'image. Ajuste-la pour être certain (ex: 120px, 150px, 180px) */
-    --dialog-text-color: #E0FFFF;
-    --dialog-font-family: 'Open Sans', sans-serif;
-
-    --pasqal-image: url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png");
+    --val-diag-border-radius:40px;
+    --val-diag-width-img:75px; /* Ajuste cette valeur pour changer la taille de l'image */
+    /* ... tes autres variables ... */
+    --val-diag-pasqal-vignette:url("TON_URL_IMAGE_CORRECTE_ICI");
 }
 
-/* --- Style du Corps de la Boîte de Dialogue --- */
-.dialog-box {
-    position: relative; /* Pour le z-index de l'image si elle "déborde" */
-    display: flex; /* <-- RE-ACTIVATION de Flexbox pour une meilleure gestion de la hauteur */
-    align-items: flex-start; /* Aligne le contenu en haut */
-    width: 90%;
-    max-width: 800px;
+/* --- Animations de Glitch (aucune modification nécessaire ici) --- */
+@keyframes glitch-x { /* ... */ }
+@keyframes glitch-color { /* ... */ }
+@keyframes flicker { /* ... */ }
+
+/* --- Style Général des Dialogues (.val_dial) --- */
+.val_dial {
+    /* min-height est moins nécessaire avec Flexbox, mais on peut le garder */
+    min-height: calc(10px + var(--val-diag-width-img));
+    border-radius: var(--val-diag-border-radius) 10px 10px var(--val-diag-border-radius);
     
-    padding: var(--dialog-padding); /* Padding interne de la boîte */
-    /* On va ajouter un padding-right supplémentaire ici pour laisser de la place à l'image */
-    padding-right: calc(var(--dialog-padding) + var(--dialog-image-size) - 60px); /* Ajuste "-60px" pour la marge intérieure de l'image */
+    /* Marges minimales du conteneur de dialogue */
+    margin: 5px 5px 5px 5px; /* Ou même 0 si tu veux coller aux bords */
+    padding: 5px; /* Espacement interne de la boîte */
+    
+    border: 1px solid var(--val-diag-color);
+    /* padding-left n'est plus nécessaire ici car l'image est à l'intérieur */
+    font-weight: bold;
 
+    /* Styles pour <i> et <c> restent les mêmes */
+    & i { /* ... */ }
+    & c { /* ... */ }
+    & c:nth-child(odd) { /* ... */ }
 
-    background-color: var(--dialog-bg-color);
-    border: var(--dialog-border-thickness) solid var(--dialog-border-color);
-    box-sizing: border-box;
-
-    font-family: var(--dialog-font-family);
-    color: var(--dialog-text-color);
-    line-height: 1.6;
-    overflow: hidden; /* Important pour cacher les parties de l'image qui dépasseraient les coins si arrondis */
+    /* Le pseudo-élément ::before reste le même */
+    &::before { /* ... */ }
 }
 
-/* --- Conteneur de l'Image du Personnage --- */
-.dialog-image-container {
-    width: var(--dialog-image-size); /* Taille fixe pour l'image */
-    height: var(--dialog-image-size);
-    background-image: var(--pasqal-image);
+/* --- Nouvelle classe pour le conteneur de contenu --- */
+.dialog-content {
+    display: flex; /* Active Flexbox */
+    align-items: flex-start; /* Alignement en haut des éléments dans la ligne */
+    gap: 10px; /* Espace entre la vignette et le texte */
+    padding: 5px 0 5px 5px; /* Ajuste le padding ici si tu veux des marges spécifiques à l'intérieur du contenu */
+}
+
+/* --- Style de la Vignette Glitchée (.vignette-container) --- */
+.vignette-container {
+    /* La vignette doit être à droite du texte */
+    order: 2; /* Place la vignette après le contenu textuel dans l'ordre Flexbox */
+    flex-shrink: 0; /* Empêche la vignette de rétrécir si le contenu texte est trop long */
+
+    /* Ces propriétés définissent l'image de fond et ses dimensions */
+    width: var(--val-diag-width-img);
+    height: var(--val-diag-width-img);
     background-size: contain;
-    background-position: center;
     background-repeat: no-repeat;
-    
-    flex-shrink: 0; /* Empêche l'image de rétrécir */
-    flex-grow: 0; /* Empêche l'image de grandir */
-    
-    /* Utilisation de marges négatives pour faire "déborder" l'image sur le padding de la boîte */
-    margin-top: calc(-1 * var(--dialog-padding)); /* Remonte l'image pour qu'elle commence au bord supérieur de la boîte */
-    margin-bottom: calc(-1 * var(--dialog-padding)); /* Descend l'image pour qu'elle s'arrête au bord inférieur de la boîte */
-    margin-right: calc(-1 * var(--dialog-padding)); /* Fait "déborder" l'image sur le padding droit de la boîte */
-    margin-left: auto; /* Pousse l'image complètement à droite dans Flexbox */
+    background-position: center;
 
-    /* Si tu veux la lueur subtile, décommente ci-dessous */
-    /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */
-    z-index: 10; /* Pour s'assurer qu'elle est au-dessus du cadre si elle le chevauche */
+    /* Applique les animations de glitch */
+    animation:
+        glitch-x 0.1s infinite steps(2) alternate,
+        glitch-color 0.3s infinite steps(2) alternate,
+        flicker 1.2s infinite steps(1);
+
+    /* Ajout d'une ombre portée pour l'effet hologramme */
+    box-shadow: 0 0 15px 5px var(--val-pasqal-color-lighten);
+    transform-style: preserve-3d;
+    transform: perspective(500px) rotateY(0deg);
 }
 
-/* --- Contenu du Texte --- */
-.dialog-text-content {
-    /* Le texte doit prendre l'espace restant */
-    flex-grow: 1; /* Prend tout l'espace horizontal disponible */
-    flex-shrink: 1; /* Peut rétrécir si nécessaire */
-    flex-basis: auto; /* Base de taille automatique */
-    min-width: 0; /* Empêche le débordement de texte si pas assez de place */
-
-    /* Le padding ici sert à l'espace entre le texte et l'image */
-    margin-right: var(--dialog-padding); /* Espace entre le texte et l'image */
-    /* Pas de padding-top, padding-bottom, padding-left car le padding est sur .dialog-box */
-}
-
-/* Ajustements pour les paragraphes à l'intérieur */
-.dialog-text-content p {
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-.dialog-text-content p:last-child {
+/* --- Styles pour le texte à gauche de l'image --- */
+.dialog-content p,
+.dialog-content i,
+.dialog-content c {
+    flex-grow: 1; /* Permet au texte de prendre l'espace restant */
+    /* Aucun alignement particulier nécessaire ici, il flottera à gauche */
+    margin-top: 0; /* Supprime les marges par défaut des paragraphes pour un contrôle fin */
     margin-bottom: 0;
+}
+
+/* --- Styles spécifiques aux personnages (pour que la vignette soit bien appliquée) --- */
+.pasqal .vignette-container {
+    background-image: var(--val-diag-pasqal-vignette);
+}
+
+.default .vignette-container {
+    background-image: var(--val-diag-default-vignette);
+    /* Tu peux aussi appliquer les animations ici si tu veux que default glitch aussi */
+}
+
+/* Ajoute des règles similaires pour .valdyra et .kay si tu veux qu'elles utilisent la nouvelle vignette */
+.valdyra .vignette-container {
+    background-image: var(--val-diag-valdyra-vignette);
+}
+.kay .vignette-container {
+    background-image: var(--val-diag-kay-vignette);
+}
+
+/* ... tes autres classes .default, .valdyra, .kay pour les couleurs etc. restent les mêmes */
+.pasqal {
+    border-color: var(--val-pasqal-color);
+    color: var(--val-pasqal-color);
+    &::before { content: "Pasqal"; }
+    & c { text-shadow: 1px 1px var(--val-pasqal-color-darken); }
 }
