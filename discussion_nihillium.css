@@ -4,7 +4,7 @@
     --dialog-border-color: #00FFFF;
     --dialog-bg-color: rgba(0, 0, 0, 0.7);
     --dialog-padding: 20px; /* Padding interne de la boîte */
-    --dialog-image-size: 150px; /* Taille de l'image. Ajuste si tu veux plus petit ou plus grand. */
+    --dialog-image-size: 150px; /* Taille de l'image. Ajuste-la pour être certain (ex: 120px, 150px, 180px) */
     --dialog-text-color: #E0FFFF;
     --dialog-font-family: 'Open Sans', sans-serif;
 
@@ -13,11 +13,16 @@
 
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
-    position: relative; /* Indispensable pour positionner l'image de manière absolue */
-    display: block;
+    position: relative; /* Pour le z-index de l'image si elle "déborde" */
+    display: flex; /* <-- RE-ACTIVATION de Flexbox pour une meilleure gestion de la hauteur */
+    align-items: flex-start; /* Aligne le contenu en haut */
     width: 90%;
     max-width: 800px;
-    padding: 0; /* <-- TRÈS IMPORTANT : Le padding est géré par le .dialog-text-content */
+    
+    padding: var(--dialog-padding); /* Padding interne de la boîte */
+    /* On va ajouter un padding-right supplémentaire ici pour laisser de la place à l'image */
+    padding-right: calc(var(--dialog-padding) + var(--dialog-image-size) - 60px); /* Ajuste "-60px" pour la marge intérieure de l'image */
+
 
     background-color: var(--dialog-bg-color);
     border: var(--dialog-border-thickness) solid var(--dialog-border-color);
@@ -26,37 +31,43 @@
     font-family: var(--dialog-font-family);
     color: var(--dialog-text-color);
     line-height: 1.6;
-    overflow: hidden; /* <-- Garder pour s'assurer que le contenu reste à l'intérieur des bordures */
+    overflow: hidden; /* Important pour cacher les parties de l'image qui dépasseraient les coins si arrondis */
 }
 
 /* --- Conteneur de l'Image du Personnage --- */
 .dialog-image-container {
-    position: absolute;
-    /* Ajustement de la position pour qu'elle déborde moins ou pas du tout */
-    top: -15px; /* Ajuste pour qu'elle déborde moins vers le haut (ex: -10px, 0px si tu ne veux pas de débordement) */
-    right: -15px; /* Ajuste pour qu'elle déborde moins vers la droite (ex: -10px, 0px si tu ne veux pas de débordement) */
-    width: var(--dialog-image-size);
+    width: var(--dialog-image-size); /* Taille fixe pour l'image */
     height: var(--dialog-image-size);
     background-image: var(--pasqal-image);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */ /* Décommenter si tu veux la lueur */
-    z-index: 10;
+    
+    flex-shrink: 0; /* Empêche l'image de rétrécir */
+    flex-grow: 0; /* Empêche l'image de grandir */
+    
+    /* Utilisation de marges négatives pour faire "déborder" l'image sur le padding de la boîte */
+    margin-top: calc(-1 * var(--dialog-padding)); /* Remonte l'image pour qu'elle commence au bord supérieur de la boîte */
+    margin-bottom: calc(-1 * var(--dialog-padding)); /* Descend l'image pour qu'elle s'arrête au bord inférieur de la boîte */
+    margin-right: calc(-1 * var(--dialog-padding)); /* Fait "déborder" l'image sur le padding droit de la boîte */
+    margin-left: auto; /* Pousse l'image complètement à droite dans Flexbox */
+
+    /* Si tu veux la lueur subtile, décommente ci-dessous */
+    /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */
+    z-index: 10; /* Pour s'assurer qu'elle est au-dessus du cadre si elle le chevauche */
 }
 
 /* --- Contenu du Texte --- */
 .dialog-text-content {
-    /* Paddings pour le texte à l'intérieur de la boîte */
-    padding: var(--dialog-padding); /* Padding général pour le texte */
+    /* Le texte doit prendre l'espace restant */
+    flex-grow: 1; /* Prend tout l'espace horizontal disponible */
+    flex-shrink: 1; /* Peut rétrécir si nécessaire */
+    flex-basis: auto; /* Base de taille automatique */
+    min-width: 0; /* Empêche le débordement de texte si pas assez de place */
 
-    /* Ajustement des paddings pour laisser de la place à l'image sans que le texte commence trop bas */
-    /* Ces valeurs dépendent de --dialog-image-size et de comment tu veux que l'image chevauche. */
-    padding-top: calc(var(--dialog-padding) + (var(--dialog-image-size) / 2) - 30px); /* Ajuste le "-30px" pour remonter le texte */
-    padding-right: calc(var(--dialog-padding) + (var(--dialog-image-size) / 2) - 30px); /* Ajuste le "-30px" pour décaler le texte */
-    
-    min-height: calc(var(--dialog-image-size) - 20px); /* Ajuste cette valeur si la boîte est trop grande avec peu de texte */
-    box-sizing: border-box;
+    /* Le padding ici sert à l'espace entre le texte et l'image */
+    margin-right: var(--dialog-padding); /* Espace entre le texte et l'image */
+    /* Pas de padding-top, padding-bottom, padding-left car le padding est sur .dialog-box */
 }
 
 /* Ajustements pour les paragraphes à l'intérieur */
