@@ -1,19 +1,31 @@
 :root {
-	--val-diag-border-radius:40px;
-	--val-diag-width-img:75px;
-	/* nodata */
-	--val-diag-color:#999999;
-	--val-diag-color-darken:color-mix(in srgb, var(--val-diag-color), black 20%);
-	--val-diag-color-lighten:color-mix(in srgb, var(--val-diag-color), white 20%);
-	--val-diag-default-vignette:url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
-	/* Pascal */
-	--val-pasqal-color:steelblue;
-	--val-pasqal-color-darken:color-mix(in srgb, var(--val-pasqal-color), black 20%);
-	--val-pasqal-color-lighten:color-mix(in srgb, var(--val-pasqal-color), white 20%);
-	--val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png");
+    --val-diag-border-radius:40px;
+    --val-diag-width-img:75px;
+    --val-diag-color:#999999;
+    --val-diag-color-darken:color-mix(in srgb, var(--val-diag-color), black 20%);
+    --val-diag-color-lighten:color-mix(in srgb, var(--val-diag-color), white 20%);
+    --val-diag-nodata-vignette:url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
+    --val-pasqal-color:steelblue;
+    --val-pasqal-color-darken:color-mix(in srgb, var(--val-pasqal-color), black 20%);
+    --val-pasqal-color-lighten:color-mix(in srgb, var(--val-pasqal-color), white 20%);
+    --val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pascal_token.png");
 }
 
 /* DIALOGUES V2 */
+.val_dial {
+    min-height:calc(10px + var(--val-diag-width-img));
+    border-radius:var(--val-diag-border-radius) 10px 10px var(--val-diag-border-radius);
+    margin:20px 20px 0px 20px;
+    padding:5px;
+    border:1px solid var(--val-diag-color);
+    padding-left:15px;
+    padding-right:calc(15px + var(--val-diag-width-img));
+    font-weight:bold;
+    background-position: calc(100% - 5px) 5px;
+    background-size: var(--val-diag-width-img) var(--val-diag-width-img);
+    background-repeat: no-repeat;
+}
+
 .val_dial i {
     color:var(--val-diag-color);
     font-weight:normal;
@@ -56,20 +68,4 @@
 
 .Pasqal::before {
     content: "Pasqal";
-}
-
-.nodata,
-.Pasqal {
-    border-color: var(--val-pasqal-color);
-    background-image: var(--val-diag-pasqal-vignette);
-    color: var(--val-pasqal-color);
-
-    /* Optionnel : effet d’ombre sur le texte animé */
-    & c {
-        text-shadow: 1px 1px var(--val-pasqal-color-darken);
-    }
-
-    &::before {
-        content: "Pasqal";
-    }
 }
