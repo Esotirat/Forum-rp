@@ -1,0 +1,53 @@
+:root {
+	--val-diag-border-radius:40px;
+	--val-diag-width-img:75px;
+	/* defaut */
+	--val-diag-color:#999999;
+	--val-diag-color-darken:color-mix(in srgb, var(--val-diag-color), black 20%);
+	--val-diag-color-lighten:color-mix(in srgb, var(--val-diag-color), white 20%);
+	--val-diag-default-vignette:url("https://jerrycow33.github.io/woa/images/vignettes/default.png");	
+	/* pasqal */
+	--val-pasqal-color:rgb(251, 215, 14);
+	--val-pasqal-color-darken:color-mix(in srgb, var(--val-pasqal-color), black 20%);
+	--val-pasqal-color-lighten:color-mix(in srgb, var(--val-pasqal-color), white 20%);
+	--val-diag-pasqal-vignette:url("https://raw.githubusercontent.com/Esotirat/Forum-rp/refs/heads/Images/IA%20apparence.jpg");
+}
+
+@keyframes glitch-x {
+	0% { transform: translateX(0); }
+	20% { transform: translateX(2px); }
+	40% { transform: translateX(-2px); }
+	60% { transform: translateX(1px); }
+	80% { transform: translateX(-1px); }
+	100% { transform: translateX(0); }
+}
+
+@keyframes glitch-color {
+	0% { filter: hue-rotate(0deg); }
+	30% { filter: hue-rotate(5deg); }
+	60% { filter: hue-rotate(-5deg); }
+	100% { filter: hue-rotate(0deg); }
+}
+
+@keyframes flicker {
+	0% { opacity: 1; }
+	5% { opacity: 0.8; }
+	10% { opacity: 1; }
+	15% { opacity: 0.9; }
+	20% { opacity: 1; }
+	25% { opacity: 0.7; }
+	30% { opacity: 1; }
+	100% { opacity: 1; } /* Reste opaque la plupart du temps */
+}
+
+/* Appliquer les effets à l'image pasqal vignette */
+.val-diag-pasqal-vignette {
+	animation:
+		glitch-x 0.4s infinite linear alternate,
+		glitch-color 0.7s infinite linear alternate,
+		flicker 1.2s infinite linear alternate;
+	/* Optionnel : pour s'assurer que l'image utilise la bonne vignette */
+	background-image: var(--val-diag-pasqal-vignette);
+	/* Si c'est une balise <img>, utilisez plutôt : */
+	/* content: url("https://jerrycow33.github.io/woa/images/vignettes/pasqal2.png"); */
+}
