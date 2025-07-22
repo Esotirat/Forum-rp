@@ -1,13 +1,8 @@
 :root {
     --val-diag-border-radius:40px;
-    --val-diag-width-img:75px;
-    --val-diag-color:#999999;
-    --val-diag-color-darken:color-mix(in srgb, var(--val-diag-color), black 20%);
-    --val-diag-color-lighten:color-mix(in srgb, var(--val-diag-color), white 20%);
+    --val-diag-width-img:200px;
+ --val-pasqal-color:steelblue;
     --val-diag-nodata-vignette:url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
-    --val-pasqal-color:steelblue;
-    --val-pasqal-color-darken:color-mix(in srgb, var(--val-pasqal-color), black 20%);
-    --val-pasqal-color-lighten:color-mix(in srgb, var(--val-pasqal-color), white 20%);
     --val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png");
 }
 
@@ -58,14 +53,26 @@
 
 .Pasqal {
     border-color: var(--val-pasqal-color) !important;
-    background-image: url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png") !important;
+    background-image: var(--val-diag-pasqal-vignette) !important;
     color: var(--val-pasqal-color) !important;
 }
 
 .Pasqal c {
     text-shadow: 1px 1px var(--val-pasqal-color-darken);
 }
+.nodata {
+    border-color: var(--val-diag-color) !important;
+    background-image: var(--val-diag-nodata-vignette) !important;
+    color: var(--val-diag-color) !important;
+}
 
+.nodata c {
+    text-shadow: 1px 1px var(--val-diag-color-darken);
+}
+
+.nodata::before {
+    content: "Nodata";
+}
 .Pasqal::before {
     content: "Pasqal";
 }
