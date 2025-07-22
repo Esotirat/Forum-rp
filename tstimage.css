@@ -3,7 +3,7 @@
     --val-diag-width-img:75px; /* La largeur de ton image */
     --val-pasqal-color:rgb(251, 215, 14); /* Juste pour les ombres du glitch */
     --val-pasqal-color-darken:color-mix(in srgb, var(--val-pasqal-color), black 20%);
-    --val-diag-pasqal-vignette:url("https://raw.githubusercontent.com/Esotirat/Forum-rp/refs/heads/Images/IA_apparence.jpg"); /* IMPORTANT: Mets ton URL d'image corrigée ici */
+    --val-diag-pasqal-vignette:url("https://raw.githubusercontent.com/Esotirat/Forum-rp/Images/IA_apparence.jpg"); /* IMPORTANT: Mets ton URL d'image corrigée ici */
 }
 
 /* --- Animations de Glitch --- */
