@@ -14,45 +14,48 @@
 }
 
 /* DIALOGUES V2 */
-.val_dial {
-	min-height:calc(10px + var(--val-diag-width-img));
-    border-radius:var(--val-diag-border-radius) 10px 10px var(--val-diag-border-radius);
-    margin:20px 20px 0px 20px;
-    padding:5px;
-    border:1px solid var(--val-diag-color);
-    padding-left:calc(15px + var(--val-diag-width-img));
-    padding-right:calc(15px + var(--val-diag-width-img));
-    font-weight:bold;
+.val_dial i {
+    color:var(--val-diag-color);
+    font-weight:normal;
+}
 
-	& i {
-		color:var(--val-diag-color);
-		font-weight:normal;
-	}
+.val_dial c {
+    display:inline-block;
+    transform: translateY(-1px);
+    animation-name: wiggleWiggle;
+    animation-duration: 0.15s;
+    animation-iteration-count: infinite;
+    text-shadow: 1px 1px var(--val-diag-color-darken);
+}
 
-	& c {
-		display:inline-block;
-  		transform: translateY(-1px);
-  		animation-name: wiggleWiggle;
-  		animation-duration: 0.15s;
-  		animation-iteration-count: infinite;
-  		text-shadow: 1px 1px var(--val-diag-color-darken);
-	}
+.val_dial c:nth-child(odd) {
+    animation-direction:reverse;
+}
 
-	& c:nth-child(odd) {
-  		animation-direction:reverse;
-	}
+.val_dial::before {
+    content:"-";
+    color:var(--val-diag-color);
+    text-transform: uppercase;
+    display:block;
+    font-weight:600;
+    font-style: italic;
+    margin-bottom:3px;		
+    padding-bottom:3px;	
+    border-bottom:1px solid var(--val-diag-color);	
+}
 
-	&::before {
-		content:"-";
-		color:var(--val-diag-color);
-		text-transform: uppercase;
-		display:block;
-		font-weight:600;
-		font-style: italic;
-		margin-bottom:3px;		
-		padding-bottom:3px;	
-		border-bottom:1px solid var(--val-diag-color);	
-	}
+.Pasqal {
+    border-color: var(--val-pasqal-color);
+    background-image: var(--val-diag-pasqal-vignette);
+    color: var(--val-pasqal-color);
+}
+
+.Pasqal c {
+    text-shadow: 1px 1px var(--val-pasqal-color-darken);
+}
+
+.Pasqal::before {
+    content: "Pasqal";
 }
 
 .nodata,
