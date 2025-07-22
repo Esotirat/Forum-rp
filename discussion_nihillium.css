@@ -4,7 +4,7 @@
     --dialog-border-color: #00FFFF; /* Couleur du cadre (un cyan éclatant) */
     --dialog-bg-color: rgba(0, 0, 0, 0.7); /* Couleur de fond de la boîte (noir semi-transparent) */
     --dialog-padding: 20px; /* Espacement interne de la boîte */
-    --dialog-image-size: 150px; /* <-- AUGMENTÉ POUR MIEUX VOIR, AJUSTE COMME TU VEUX (ex: 100px, 120px, 150px) */
+    --dialog-image-size: 150px; /* <-- TAILLE DE RÉFÉRENCE POUR L'IMAGE. PEUX AJUSTER (ex: 100px, 120px, 150px, 200px) */
     --dialog-text-color: #E0FFFF; /* Couleur du texte (blanc-bleu clair) */
     --dialog-font-family: 'Open Sans', sans-serif; /* Police de caractères pour le texte */
 
@@ -33,34 +33,30 @@
 
 /* --- Conteneur de l'Image du Personnage --- */
 .dialog-image-container {
-    width: var(--dialog-image-size); /* Taille de l'image */
-    height: var(--dialog-image-size);
+    width: var(--dialog-image-size); /* <-- Taille en largeur */
+    height: var(--dialog-image-size); /* <-- Taille en hauteur */
     background-image: var(--pasqal-image);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    flex-shrink: 0; /* Empêche l'image de rétrécir */
+    flex-shrink: 0; /* <-- TRÈS IMPORTANT : Empêche l'image de rétrécir sous la taille spécifiée */
+    flex-grow: 0; /* <-- NOUVEAU : Empêche l'image de grandir si elle n'a pas besoin */
 
     margin-left: auto; /* Pousse l'élément vers la droite dans Flexbox */
-    /* order: 2; <-- RETIRÉ : L'ordre par défaut du HTML est souvent suffisant avec margin-left: auto */
-
     /* Si tu veux une lueur subtile, décommente ci-dessous, sinon supprime la ligne */
     /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */
 }
 
 /* --- Contenu du Texte --- */
 .dialog-text-content {
-    padding: 0; /* Pas de padding ici pour éviter d'agrandir */
+    padding: 0;
     overflow: auto;
     flex-grow: 1; /* Le texte prend tout l'espace disponible en largeur */
-    flex-basis: 0; /* Aide flex-grow à fonctionner correctement */
+    flex-basis: auto; /* <-- CHANGEMENT : Laisse le texte déterminer sa base de taille, plus flexible */
     min-width: 0; /* Évite les débordements de texte */
-    /* order: 1; <-- RETIRÉ : L'ordre par défaut du HTML est souvent suffisant avec margin-left: auto */
-    flex-shrink: 1; /* <-- NOUVEAU : Permet au texte de rétrécir si besoin, pour laisser de la place à l'image */
+    flex-shrink: 1; /* Permet au texte de rétrécir si besoin */
 
-    /* Ajustement CRUCIAL POUR LE PADDING À DROITE DU TEXTE POUR NE PAS CHEVAUCHER L'IMAGE */
-    /* On utilise une marge (margin-right) pour l'espace entre le texte et l'image */
-    margin-right: var(--dialog-padding); /* <-- NOUVEAU : Espace entre le texte et l'image */
+    margin-right: var(--dialog-padding); /* Espace entre le texte et l'image */
 }
 
 /* Ajustements pour les paragraphes à l'intérieur */
