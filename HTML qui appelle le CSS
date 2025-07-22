@@ -1,0 +1,7 @@
+<div class="dialog-box">
+    <div class="dialog-image-container"></div>
+    <div class="dialog-text-content">
+        <p>Ceci est un exemple de texte de dialogue, il peut être court ou très long. La boîte s'adaptera automatiquement pour contenir tout le contenu, assurant que rien ne déborde et que la lecture reste agréable.</p>
+        <p>Tu peux ajouter autant de paragraphes ou d'autres éléments HTML ici que tu le souhaites. Le design sera flexible.</p>
+    </div>
+</div>
