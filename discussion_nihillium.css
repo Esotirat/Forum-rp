@@ -4,7 +4,7 @@
     --dialog-border-color: #00FFFF; /* Couleur du cadre (un cyan éclatant) */
     --dialog-bg-color: rgba(0, 0, 0, 0.7); /* Couleur de fond de la boîte (noir semi-transparent) */
     --dialog-padding: 20px; /* Espacement interne de la boîte */
-    --dialog-image-size: 100px; /* Taille de l'image de personnage (on la réduit pour mieux la gérer) */
+    --dialog-image-size: 100px; /* Taille de l'image de personnage (peut-être réduire à 100px ou 120px pour un meilleur ajustement) */
     --dialog-text-color: #E0FFFF; /* Couleur du texte (blanc-bleu clair) */
     --dialog-font-family: 'Open Sans', sans-serif; /* Police de caractères pour le texte */
 
@@ -14,16 +14,14 @@
 
 /* --- Style du Corps de la Boîte de Dialogue --- */
 .dialog-box {
-    position: relative; /* Nécessaire pour positionner l'image */
-    display: flex; /* <-- Utilise Flexbox pour la mise en page */
-    flex-wrap: wrap; /* <-- Permet aux éléments de passer à la ligne si besoin */
-    align-items: flex-start; /* <-- Aligner les éléments en haut */
+    position: relative;
+    display: flex; /* Utilise Flexbox */
+    /* flex-wrap: wrap; <-- On va le retirer ou le gérer plus tard, car il force le passage à la ligne */
+    align-items: flex-start; /* Aligner les éléments en haut */
     width: 90%;
     max-width: 800px;
-    /* min-height: 120px; <-- ENLEVÉ : la hauteur s'adaptera au contenu Flexbox */
 
-    padding: var(--dialog-padding);
-    /* Les paddings seront gérés par la relation Flexbox entre les éléments */
+    padding: var(--dialog-padding); /* Padding global de la boîte */
 
     background-color: var(--dialog-bg-color);
     border: var(--dialog-border-thickness) solid var(--dialog-border-color);
@@ -36,19 +34,17 @@
 
 /* --- Conteneur de l'Image du Personnage --- */
 .dialog-image-container {
-    /* Suppression de position: absolute car on veut qu'elle soit dans le flux Flexbox */
-    /* top, right, z-index ne sont plus nécessaires avec Flexbox pour ce positionnement */
-    width: var(--dialog-image-size); /* Taille de l'image */
+    width: var(--dialog-image-size);
     height: var(--dialog-image-size);
-    background-image: var(--pasqal-image); /* L'image du personnage */
+    background-image: var(--pasqal-image);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     flex-shrink: 0; /* Empêche l'image de rétrécir */
 
-    /* On ajoute de la marge à gauche pour la déplacer vers la droite du conteneur Flexbox */
-    margin-left: auto; /* <-- Pousse l'élément vers la droite dans Flexbox */
-    margin-bottom: var(--dialog-padding); /* Petite marge sous l'image si le texte est court */
+    margin-left: auto; /* Pousse l'élément vers la droite dans Flexbox */
+    /* margin-bottom: var(--dialog-padding); <-- On enlève cette marge car le texte doit remonter */
+    order: 2; /* <-- NOUVEAU : Force l'image à être le deuxième élément logique */
 
     /* Si tu veux une lueur subtile, décommente ci-dessous, sinon supprime la ligne */
     /* box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.5); */
@@ -56,20 +52,22 @@
 
 /* --- Contenu du Texte --- */
 .dialog-text-content {
-    /* Supprimons les paddings qui décalaient le texte et agrandissaient la boîte */
-    padding: 0;
-    overflow: auto; /* Permet le défilement si le texte est très très long */
-    /* Le texte prendra l'espace restant */
-    flex-grow: 1; /* <-- LE TEXTE PREND TOUT L'ESPACE DISPONIBLE EN LARGEUR */
+    padding: 0; /* Pas de padding ici pour éviter d'agrandir */
+    overflow: auto;
+    flex-grow: 1; /* Le texte prend tout l'espace disponible en largeur */
     flex-basis: 0; /* Aide flex-grow à fonctionner correctement */
-    min-width: 0; /* Nécessaire pour éviter les débordements de texte à l'intérieur de flexbox */
+    min-width: 0; /* Évite les débordements de texte */
+    order: 1; /* <-- NOUVEAU : Force le texte à être le premier élément logique */
+
+    /* AJUSTEMENT CRUCIAL POUR LE PADDING À DROITE DU TEXTE POUR NE PAS CHEVAUCHER L'IMAGE */
+    padding-right: calc(var(--dialog-image-size) + var(--dialog-padding)); /* Donne de l'espace à droite du texte pour l'image */
 }
 
 /* Ajustements pour les paragraphes à l'intérieur */
 .dialog-text-content p {
     margin-top: 0;
-    margin-bottom: 10px; /* Espacement entre les paragraphes */
+    margin-bottom: 10px;
 }
 .dialog-text-content p:last-child {
-    margin-bottom: 0; /* Pas de marge après le dernier paragraphe */
+    margin-bottom: 0;
 }
