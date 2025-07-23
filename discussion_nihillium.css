@@ -1,6 +1,6 @@
 :root {
     --val-diag-border-radius: 0;
-    --val-diag-width-img: 200px;
+    --val-diag-width-img: 150px;
     --val-diag-color: steelblue;
     --val-diag-nodata-vignette: url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
     --val-diag-pasqal-vignette: url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png");
@@ -31,7 +31,7 @@
     text-transform: uppercase;
     font-weight: 700;
     font-style: italic;
-    text-align: left;
+    text-align: right;
     margin-bottom: 8px;
     padding-bottom: 6px;
     border-bottom: 2px solid currentColor;
