@@ -8,18 +8,15 @@
 
 /* DIALOGUES V2 */
 .val_dial {
-    min-height:calc(10px + var(--val-diag-width-img));
-    border-radius:var(--val-diag-border-radius);
-    border-right: none !important;
-    margin:20px 20px 0px 20px;
-    padding:5px;
-    border:1px solid var(--val-diag-color);
-    padding-left:15px;
-    padding-right:calc(15px + var(--val-diag-width-img));
-    font-weight:bold;
-    background-position: calc(100% - 5px) 5px;
-    background-size: var(--val-diag-width-img) var(--val-diag-width-img);
-    background-repeat: no-repeat;
+    border: 2px solid var(--val-diag-color);
+    border-radius: var(--val-diag-border-radius);
+    background: #fff;
+    padding: 20px 20px 15px 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    position: relative;
+    font-weight: normal;
+    box-sizing: border-box;
 }
 
 .val_dial i {
@@ -41,15 +38,20 @@
 }
 
 .val_dial::before {
-    content:"-";
-    color:var(--val-diag-color);
+    content: attr(data-speaker);
+    display: block;
+    color: inherit;
     text-transform: uppercase;
-    display:block;
-    font-weight:600;
+    font-weight: 700;
     font-style: italic;
-    margin-bottom:3px;		
-    padding-bottom:3px;	
-    border-bottom:1px solid var(--val-diag-color);	
+    text-align: left; /* ou center si tu préfères */
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid currentColor;
+    box-shadow: 0 2px 8px 0 currentColor, 0 0px 16px 0 currentColor;
+    width: 100%;
+    letter-spacing: 1px;
+    font-size: 1.1em;
 }
 
 .Pasqal {
