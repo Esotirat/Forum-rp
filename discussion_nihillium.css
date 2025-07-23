@@ -1,5 +1,5 @@
 :root {
-    --val-diag-border-radius: 10px;
+    --val-diag-border-radius: 0;
     --val-diag-width-img: 100px;
     --val-diag-color: steelblue;
     --val-diag-nodata-vignette: url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
@@ -20,7 +20,7 @@
     background-size: var(--val-diag-width-img) var(--val-diag-width-img);
     background-repeat: no-repeat;
     padding-right: calc(20px + var(--val-diag-width-img));
-    min-height: calc(var(--val-diag-width-img) + 2 * 20px); /* 20px = padding top + bottom */
+    min-height: 150px
 }
 
 /* Nom du personnage + trait brillant */
@@ -31,7 +31,7 @@
     text-transform: uppercase;
     font-weight: 700;
     font-style: italic;
-    text-align: right;
+    text-align: left;
     margin-bottom: 8px;
     padding-bottom: 6px;
     border-bottom: 2px solid currentColor;
