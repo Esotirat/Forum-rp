@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
+
 :root {
     --val-diag-border-radius: 0;
     --val-diag-width-img: 150px;
@@ -37,7 +39,6 @@
     color: inherit;
     text-transform: uppercase;
     font-weight: 700;
-    font-style: italic;
     text-align: right;
     margin-bottom: 8px;
     padding-bottom: 6px;
@@ -66,6 +67,7 @@
     color: royalblue !important;
     border-color: royalblue !important;
     background-image: var(--val-diag-rita-vignette) !important;
+    font-family: 'Oxanium'!important;
 /* Application de l'animation glitch */
     animation: glitchEffect 1.5s infinite linear alternate; /* Ajustez la durée et le timing si besoin */
 }
