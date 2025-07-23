@@ -1,6 +1,6 @@
 :root {
-    --val-diag-border-radius: 0;
-    --val-diag-width-img: 150px;
+    --val-diag-border-radius: 10px;
+    --val-diag-width-img: 100px;
     --val-diag-color: steelblue;
     --val-diag-nodata-vignette: url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
     --val-diag-pasqal-vignette: url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png");
@@ -12,7 +12,7 @@
     border-radius: var(--val-diag-border-radius);
     background: #fff;
     padding: 20px 20px 15px 20px;
-    margin: 20px auto;
+    margin: 30px auto;
     max-width: 600px;
     position: relative;
     font-weight: normal;
@@ -20,7 +20,6 @@
     background-position: right 20px top 20px;
     background-size: var(--val-diag-width-img) var(--val-diag-width-img);
     background-repeat: no-repeat;
-    /* Ajoute un padding à droite pour ne pas chevaucher l'image */
     padding-right: calc(20px + var(--val-diag-width-img));
 }
 
@@ -32,13 +31,11 @@
     text-transform: uppercase;
     font-weight: 700;
     font-style: italic;
-    text-align: right;
-    margin-bottom: 6px;
+    text-align: left;
+    margin-bottom: 8px;
     padding-bottom: 6px;
     border-bottom: 2px solid currentColor;
-    /* Lueur sur le trait */
-    box-shadow: 0 2px 8px 0 currentColor, 0 4px 16px 0 currentColor;
-    width: 100%;
+    box-shadow: 0 2px 8px 0 currentColor, 0 0px 16px 0 currentColor;
     letter-spacing: 1px;
     font-size: 1.1em;
     background: none;
