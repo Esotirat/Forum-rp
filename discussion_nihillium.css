@@ -53,9 +53,9 @@
 }
 
 .Pasqal {
-    border-color: var(--val-pasqal-color) !important;
+    border-color: var(--val-diag-color) !important;
     background-image: var(--val-diag-pasqal-vignette) !important;
-    color: var(--val-pasqal-color) !important;
+    color: var(--val-diag-color) !important;
 }
 
 .Pasqal c {
@@ -74,11 +74,21 @@
 .Pasqal::before {
     content: "Pasqal";
     border-bottom: 1px solid goldenrod !important;
-    box-shadow: 0 2px 8px 0 gold, 0 0px 16px 0 gold;
+    /* Applique la lueur uniquement sur la bordure du bas */
+    box-shadow: 0 2px 8px 0 gold, 0 4px 16px 0 gold;
+    /* Réduit la hauteur pour que la lueur suive le trait */
+    display: block;
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+    width: fit-content;
 }
 
 .nodata::before {
     content: "Nodata";
     border-bottom: 1px solid steelblue !important;
-    box-shadow: 0 2px 8px 0 steelblue, 0 0px 16px 0 steelblue;
+    box-shadow: 0 2px 8px 0 steelblue, 0 4px 16px 0 steelblue;
+    display: block;
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+    width: fit-content;
 }
