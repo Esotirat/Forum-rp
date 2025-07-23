@@ -18,7 +18,7 @@
     font-weight: normal;
     box-sizing: border-box;
     background-position: right 20px top 20px;
-    background-size: var(--val-diag-width-img) var(--val-diag-width-img);
+    background-size: var(--val-diag-width-img) auto;
     background-repeat: no-repeat;
     padding-right: calc(20px + var(--val-diag-width-img));
     min-height: 200px;
