@@ -1,5 +1,5 @@
 :root {
-    --val-diag-border-radius:40px;
+    --val-diag-border-radius:0;
     --val-diag-width-img:150px;
     --val-diag-color:steelblue;
     --val-diag-nodata-vignette:url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
@@ -9,7 +9,8 @@
 /* DIALOGUES V2 */
 .val_dial {
     min-height:calc(10px + var(--val-diag-width-img));
-    border-radius:var(--val-diag-border-radius) 10px 10px var(--val-diag-border-radius);
+    border-radius:var(--val-diag-border-radius);
+    border-right: none !important;
     margin:20px 20px 0px 20px;
     padding:5px;
     border:1px solid var(--val-diag-color);
@@ -70,9 +71,14 @@
     text-shadow: 1px 1px var(--val-diag-color-darken);
 }
 
-.nodata::before {
-    content: "Nodata";
-}
 .Pasqal::before {
     content: "Pasqal";
+    border-bottom: 1px solid goldenrod !important;
+    box-shadow: 0 2px 8px 0 gold, 0 0px 16px 0 gold;
+}
+
+.nodata::before {
+    content: "Nodata";
+    border-bottom: 1px solid steelblue !important;
+    box-shadow: 0 2px 8px 0 steelblue, 0 0px 16px 0 steelblue;
 }
