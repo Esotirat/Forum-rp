@@ -40,6 +40,7 @@
     color: inherit;
     text-transform: uppercase;
     font-weight: 700;
+    font-family: 'Oxanium', sans-serif;
     text-align: right;
     margin-bottom: 8px;
     padding-bottom: 6px;
@@ -68,9 +69,13 @@
     color: royalblue !important;
     border-color: royalblue !important;
     background-image: var(--val-diag-rita-vignette) !important;
-    font-family: 'Oxanium'!important;
 /* Application de l'animation glitch */
     animation: glitchEffect 1.5s infinite linear alternate; /* Ajustez la durée et le timing si besoin */
+}
+
+/* NOUVELLE RÈGLE : Appliquer la police Oxanium au texte À L'INTÉRIEUR des boîtes de dialogue de Rita */
+.Rita p {
+    font-family: 'Oxanium', sans-serif !important;
 }
 
 /* Définition de l'animation glitch */
