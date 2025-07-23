@@ -1,12 +1,12 @@
 :root {
-    --val-diag-border-radius:0;
-    --val-diag-width-img:150px;
-    --val-diag-color:steelblue;
-    --val-diag-nodata-vignette:url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
-    --val-diag-pasqal-vignette:url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png");
+    --val-diag-border-radius: 0;
+    --val-diag-width-img: 150px;
+    --val-diag-color: steelblue;
+    --val-diag-nodata-vignette: url("https://Esotirat.github.io/Forum-rp/Images/simple_token.png");
+    --val-diag-pasqal-vignette: url("https://Esotirat.github.io/Forum-rp/Images/Pasqal_token.png");
 }
 
-/* DIALOGUES V2 */
+/* Boîte de dialogue */
 .val_dial {
     border: 2px solid var(--val-diag-color);
     border-radius: var(--val-diag-border-radius);
@@ -17,26 +17,14 @@
     position: relative;
     font-weight: normal;
     box-sizing: border-box;
+    background-position: right 20px top 20px;
+    background-size: var(--val-diag-width-img) var(--val-diag-width-img);
+    background-repeat: no-repeat;
+    /* Ajoute un padding à droite pour ne pas chevaucher l'image */
+    padding-right: calc(20px + var(--val-diag-width-img));
 }
 
-.val_dial i {
-    color:var(--val-diag-color);
-    font-weight:normal;
-}
-
-.val_dial c {
-    display:inline-block;
-    transform: translateY(-1px);
-    animation-name: wiggleWiggle;
-    animation-duration: 0.15s;
-    animation-iteration-count: infinite;
-    text-shadow: 1px 1px var(--val-diag-color-darken);
-}
-
-.val_dial c:nth-child(odd) {
-    animation-direction:reverse;
-}
-
+/* Nom du personnage + trait brillant */
 .val_dial::before {
     content: attr(data-speaker);
     display: block;
@@ -44,53 +32,28 @@
     text-transform: uppercase;
     font-weight: 700;
     font-style: italic;
-    text-align: left; /* ou center si tu préfères */
+    text-align: left;
     margin-bottom: 6px;
     padding-bottom: 6px;
     border-bottom: 2px solid currentColor;
-    box-shadow: 0 2px 8px 0 currentColor, 0 0px 16px 0 currentColor;
+    /* Lueur sur le trait */
+    box-shadow: 0 2px 8px 0 currentColor, 0 4px 16px 0 currentColor;
     width: 100%;
     letter-spacing: 1px;
     font-size: 1.1em;
+    background: none;
 }
 
+/* Pasqal : couleur et image */
 .Pasqal {
-    border-color: var(--val-diag-color) !important;
+    color: goldenrod !important;
+    border-color: goldenrod !important;
     background-image: var(--val-diag-pasqal-vignette) !important;
-    color: var(--val-diag-color) !important;
 }
 
-.Pasqal c {
-    text-shadow: 1px 1px var(--val-pasqal-color-darken);
-}
+/* nodata : couleur et image */
 .nodata {
-    border-color: var(--val-diag-color) !important;
+    color: steelblue !important;
+    border-color: steelblue !important;
     background-image: var(--val-diag-nodata-vignette) !important;
-    color: var(--val-diag-color) !important;
-}
-
-.nodata c {
-    text-shadow: 1px 1px var(--val-diag-color-darken);
-}
-
-.Pasqal::before {
-    content: "Pasqal";
-    border-bottom: 1px solid goldenrod !important;
-    /* Applique la lueur uniquement sur la bordure du bas */
-    box-shadow: 0 2px 8px 0 gold, 0 4px 16px 0 gold;
-    /* Réduit la hauteur pour que la lueur suive le trait */
-    display: block;
-    padding-bottom: 3px;
-    margin-bottom: 3px;
-    width: fit-content;
-}
-
-.nodata::before {
-    content: "Nodata";
-    border-bottom: 1px solid steelblue !important;
-    box-shadow: 0 2px 8px 0 steelblue, 0 4px 16px 0 steelblue;
-    display: block;
-    padding-bottom: 3px;
-    margin-bottom: 3px;
-    width: fit-content;
 }
