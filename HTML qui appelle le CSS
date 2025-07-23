@@ -8,13 +8,5 @@
 </div>
 
 
-<div class="val_dial nodata">
-    <i>Nodata observe la scène.</i><br>
-    Voici le texte du dialogue de nodata.
-</div>
-
-
-<div class="val_dial Pasqal">
-    <i>Nodata observe la scène.</i><br>
-    Voici le texte du dialogue de nodata.
-</div>
+<p><div class="val_dial nodata" data-speaker="Brocantier mécontent">
+<p class="font-oxanium">"Reviens là ! Voleur ! Je vais te fumer !"</p></div>
