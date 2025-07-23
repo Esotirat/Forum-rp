@@ -10,7 +10,6 @@
 .val_dial {
     border: 2px solid var(--val-diag-color);
     border-radius: var(--val-diag-border-radius);
-    background: #fff;
     padding: 20px 20px 15px 20px;
     margin: 30px auto;
     max-width: 600px;
@@ -21,6 +20,7 @@
     background-size: var(--val-diag-width-img) var(--val-diag-width-img);
     background-repeat: no-repeat;
     padding-right: calc(20px + var(--val-diag-width-img));
+ min-height: calc(var(--val-diag-width-img) + 5px); /* 40px pour le padding, ajuste si besoin */
 }
 
 /* Nom du personnage + trait brillant */
